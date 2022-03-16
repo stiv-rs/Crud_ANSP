@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   const routes: Routes = [
     { path: 'directivas', component: DirectivaComponent },
     { path: 'clientes', component: ClientesComponent },
+    { path: 'clientes/form', component: FormComponent },
     { path: '**', pathMatch: 'full', redirectTo: '/clientes' }
   ];
 
