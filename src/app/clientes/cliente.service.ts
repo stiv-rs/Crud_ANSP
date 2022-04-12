@@ -21,7 +21,15 @@ export class ClienteService {
     //return of(CLIENTES);--forma estatica
     //return this.http.get<Cliente[]>(this.urlEndPonit);-- casteando
     return this.http.get(this.urlEndPoint).pipe(
-      map((response)=>response as Cliente[])
+      map((response)=>{
+        let clientes = response as Cliente[];
+
+        return clientes.map(cliente =>{
+          cliente.nombre = cliente.nombre.toUpperCase();
+          cliente.apellido = cliente.apellido.toUpperCase();
+          return cliente;
+        });
+      })
     );
   }
 
