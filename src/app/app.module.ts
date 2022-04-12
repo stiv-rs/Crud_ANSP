@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteService } from './clientes/cliente.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs,'es');
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
