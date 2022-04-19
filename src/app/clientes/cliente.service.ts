@@ -19,14 +19,12 @@ export class ClienteService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  getClientes():Observable<Cliente[]>{
+  getClientes(page:number):Observable<any>{
     //return of(CLIENTES);--forma estatica
     //return this.http.get<Cliente[]>(this.urlEndPonit);-- casteando
-    return this.http.get(this.urlEndPoint).pipe(
-      map((response)=>{
-        let clientes = response as Cliente[];
-
-        return clientes.map(cliente =>{
+    return this.http.get(this.urlEndPoint+'/page/'+page).pipe(
+      map((response: any)=>{
+        (response.content as Cliente[]).map(cliente =>{
           cliente.nombre = cliente.nombre.toUpperCase();
           cliente.apellido = cliente.apellido.toUpperCase();
           // Cambiar el idioma a la fecha
@@ -36,6 +34,7 @@ export class ClienteService {
           cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');// --con formatDate = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
           return cliente;
         });
+        return response;
       })
     );
   }
