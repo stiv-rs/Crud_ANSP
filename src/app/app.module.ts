@@ -1,4 +1,3 @@
-import { FormComponent } from './clientes/form.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteService } from './clientes/cliente.service';
 import { NgModule } from '@angular/core';
@@ -15,6 +14,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FormComponent } from './clientes/form.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 const routes :Routes = [
   { path: '',redirectTo:'/clientes', pathMatch:'full'},
@@ -32,7 +33,8 @@ const routes :Routes = [
     FooterComponent,
     ClientesComponent,
     DirectivaComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
