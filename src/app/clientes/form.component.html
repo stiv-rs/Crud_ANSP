@@ -8,7 +8,7 @@
   <div class="card-body">
     <form #clienteForm="ngForm">
       <div class="form-group row my-2">
-        <label for="apellido" class="col-form-label col-sm-2">Nombre</label>
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" #nombre="ngModel">
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
@@ -23,7 +23,7 @@
       </div>
 
       <div class="form-group row my-2">
-        <label for="email" class="col-form-label col-sm-2">Apellido</label>
+        <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido"#apellido="ngModel">
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
@@ -38,7 +38,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2">Email</label>
+        <label for="email" class="col-form-label col-sm-2">Email</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" #email="ngModel">
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -49,6 +49,15 @@
               El e-mail tiene un formato invalido
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="form-group row my-2">
+        <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
+        <div class="col-sm-6">
+          <input matInput [matDatepicker]="miDatapicker" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" style="display: inline; width: 300px;">
+          <mat-datepicker-toggle [for]="miDatapicker"></mat-datepicker-toggle>
+          <mat-datepicker #miDatapicker></mat-datepicker>
         </div>
       </div>
 
