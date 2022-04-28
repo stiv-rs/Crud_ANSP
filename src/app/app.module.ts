@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { FormComponent } from './clientes/form.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetalleComponent } from './clientes/detalle/detalle.component';
 
 const routes :Routes = [
   { path: '',redirectTo:'/clientes', pathMatch:'full'},
@@ -26,7 +27,8 @@ const routes :Routes = [
   { path: 'clientes/page/:page', component: ClientesComponent},
   { path: 'directivas', component: DirectivaComponent},
   { path: 'clientes/form',component:FormComponent},
-  { path: 'clientes/form/:id',component:FormComponent}
+  { path: 'clientes/form/:id',component:FormComponent},
+  { path: 'clientes/ver/:id',component:DetalleComponent}
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const routes :Routes = [
     ClientesComponent,
     DirectivaComponent,
     FormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
