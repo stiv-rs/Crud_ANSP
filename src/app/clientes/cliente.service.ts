@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Cliente } from './cliente';
 import { Observable,throwError } from 'rxjs';
 import { of } from 'rxjs';
+import { Region } from './region';
 import { HttpClient, HttpEvent, HttpHeaders,HttpRequest } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -18,6 +19,10 @@ export class ClienteService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
+  getRegiones(): Observable<Region[]>{
+    return this.http.get<Region[]>(this.urlEndPoint+'/regiones');
+  }
+
   getClientes(page:number):Observable<any>{
     //return of(CLIENTES);--forma estatica
     //return this.http.get<Cliente[]>(this.urlEndPonit);-- casteando
@@ -30,7 +35,7 @@ export class ClienteService {
 
           //con DatePipe
           let datePipe= new DatePipe('es');
-          cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');// --con formatDate = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
+          //cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');// --con formatDate = formatDate(cliente.createAt, 'dd-MM-yyyy','en-US');
           return cliente;
         });
         return response;

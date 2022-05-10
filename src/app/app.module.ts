@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteService } from './clientes/cliente.service';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -50,7 +50,7 @@ const routes :Routes = [
     MatDatepickerModule,
     MatMomentDateModule
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
