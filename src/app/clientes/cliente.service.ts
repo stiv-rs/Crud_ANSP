@@ -19,8 +19,22 @@ export class ClienteService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
+  private isNoAutorizado(e): boolean{
+     if (e.status == 401 || e.status == 403) {
+       this.router.navigate(['/login']);
+       return true;
+     }else{
+       return false;
+     }
+  }
+
   getRegiones(): Observable<Region[]>{
-    return this.http.get<Region[]>(this.urlEndPoint+'/regiones');
+    return this.http.get<Region[]>(this.urlEndPoint+'/regiones').pipe(
+      catchError(e =>{
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
   }
 
   getClientes(page:number):Observable<any>{
@@ -46,6 +60,11 @@ export class ClienteService {
   getCliente(id): Observable<Cliente>{
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         this.router.navigate(['/clientes']);
         console.error(e.error.mensaje);
         swal.fire(e.error.mensaje, e.error.error,'error');
@@ -58,6 +77,11 @@ export class ClienteService {
     return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers:this.httpHeaders}).pipe(
       map((response:any) => response.cliente as Cliente),
       catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         if (e.status ==400) {
           return throwError(e);
         }
@@ -71,6 +95,11 @@ export class ClienteService {
   update(cliente:Cliente):Observable<any>{
     return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`,cliente,{headers: this.httpHeaders}).pipe(
       catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         if (e.status ==400) {
           return throwError(e);
         }
@@ -84,6 +113,11 @@ export class ClienteService {
   delete(id:number): Observable<Cliente>{
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`,{headers: this.httpHeaders}).pipe(
       catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
         swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
@@ -100,6 +134,11 @@ export class ClienteService {
       reportProgress: true
     });
 
-    return this.http.request(req);
+    return this.http.request(req).pipe(
+      catchError(e =>{
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
   }
 }
