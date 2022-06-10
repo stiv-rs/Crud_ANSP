@@ -3,7 +3,9 @@
   <div class="card-body">
     <h5 class="card-title">Listado de clientes</h5>
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear cliente</button>
+      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">
+        Crear cliente
+      </button>
     </div>
     <div *ngIf="clientes?.length == 0" class="alert alert-info">
       No hay registros en la tabla.
@@ -11,18 +13,18 @@
     <table class="table table-bordered text-white" *ngIf="clientes?.length>0">
       <thead>
         <tr>
-          <th>ID</th>
+          <th *ngIf="authService.hasRole('ROLE_USER')">ID</th>
           <th>NOMBRE</th>
           <th>APELLIDO</th>
           <th>EMAIL</th>
           <th>FECHA</th>
-          <th>EDITAR</th>
-          <th>ELIMINAR</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">EDITAR</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">ELIMINAR</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td>
+          <td *ngIf="authService.hasRole('ROLE_USER')">
             <img
               (click)="abrirModal(cliente)"
               *ngIf="cliente?.foto"
@@ -43,10 +45,10 @@
           <td>{{cliente.apellido}}</td>
           <td>{{cliente.email}}</td>
           <td>{{cliente.createAt | date:'EEEE dd, MMMM yyyy'}}</td>
-          <td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="editar" [routerLink]="['/clientes/form', cliente.id]" class="btn btn-primary">Editar</button>
           </td>
-          <td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger">Eliminar</button>
           </td>
         </tr>

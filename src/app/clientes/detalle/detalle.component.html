@@ -30,7 +30,7 @@
                   </li>
                   <li class="list-group-item">{{ cliente.region.nombre }}</li>
                 </ul>
-                <div class="input-group">
+                <div class="input-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
                   <input
                     (change)="seleccionarFoto($event)"
                     type="file"

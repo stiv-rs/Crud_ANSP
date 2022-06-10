@@ -1,3 +1,4 @@
+import { AuthService } from './../../usuarios/auth.service';
 import { ClienteService } from './../cliente.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
@@ -19,7 +20,8 @@ export class DetalleComponent implements OnInit {
   progreso: number = 0;
 
   constructor(private clienteService:ClienteService,
-              public modalService:ModalService) { }
+              public modalService:ModalService,
+              public authService:AuthService) { }
 
   ngOnInit() {}
 
