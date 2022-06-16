@@ -1,3 +1,5 @@
+import { RoleGuard } from './usuarios/guards/role.guard';
+import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteService } from './clientes/cliente.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -27,8 +29,8 @@ const routes :Routes = [
   { path: 'clientes', component: ClientesComponent},
   { path: 'clientes/page/:page', component: ClientesComponent},
   { path: 'directivas', component: DirectivaComponent},
-  { path: 'clientes/form',component:FormComponent},
-  { path: 'clientes/form/:id',component:FormComponent},
+  { path: 'clientes/form',component:FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role:'ROLE_ADMIN'}},
+  { path: 'clientes/form/:id',component:FormComponent, canActivate:[AuthGuard,RoleGuard], data:{role:'ROLE_ADMIN'}},
   { path: 'login',component:LoginComponent}
 ]
 
