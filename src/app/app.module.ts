@@ -16,13 +16,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { DirectivaComponent } from './directiva/directiva.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './clientes/form.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './usuarios/login.component';
+import { TokenInterceptor } from './usuarios/interceptors/token.Interceptor';
 
 const routes :Routes = [
   { path: '',redirectTo:'/clientes', pathMatch:'full'},
@@ -55,7 +56,9 @@ const routes :Routes = [
     MatDatepickerModule,
     MatMomentDateModule
   ],
-  providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es' }],
+  providers: [ClienteService,
+    {provide: LOCALE_ID, useValue: 'es' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
