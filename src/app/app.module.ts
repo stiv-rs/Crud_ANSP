@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './usuarios/login.component';
 import { TokenInterceptor } from './usuarios/interceptors/token.Interceptor';
+import { AuthInterceptor } from './usuarios/interceptors/auth.Interceptor';
 
 const routes :Routes = [
   { path: '',redirectTo:'/clientes', pathMatch:'full'},
@@ -58,7 +59,8 @@ const routes :Routes = [
   ],
   providers: [ClienteService,
     {provide: LOCALE_ID, useValue: 'es' },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
