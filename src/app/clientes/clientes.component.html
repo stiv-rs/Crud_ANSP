@@ -13,7 +13,7 @@
     <table class="table table-bordered text-white" *ngIf="clientes?.length>0">
       <thead>
         <tr>
-          <th *ngIf="authService.hasRole('ROLE_USER')">ID</th>
+          <th>ID</th>
           <th>NOMBRE</th>
           <th>APELLIDO</th>
           <th>EMAIL</th>
@@ -24,7 +24,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td *ngIf="authService.hasRole('ROLE_USER')">
+          <td>
             <img
               (click)="abrirModal(cliente)"
               *ngIf="cliente?.foto"
