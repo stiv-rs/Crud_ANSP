@@ -11,9 +11,13 @@ export class FacturaService {
 
   private urlEndPoint: string = 'http://localhost:8080/api/facturas';
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   getFactura(id:number):Observable<Factura>{
-    return this.httpClient.get<Factura>(`${this.urlEndPoint}/${id }`);
+    return this.http.get<Factura>(`${this.urlEndPoint}/${id }`);
+  }
+
+  delete(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.urlEndPoint}/${id}`);
   }
 }
