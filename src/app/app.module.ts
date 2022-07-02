@@ -25,6 +25,7 @@ import { DetalleComponent } from './clientes/detalle/detalle.component';
 import { LoginComponent } from './usuarios/login.component';
 import { TokenInterceptor } from './usuarios/interceptors/token.Interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.Interceptor';
+import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
 
 const routes :Routes = [
   { path: '',redirectTo:'/clientes', pathMatch:'full'},
@@ -33,7 +34,8 @@ const routes :Routes = [
   { path: 'directivas', component: DirectivaComponent},
   { path: 'clientes/form',component:FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role:'ROLE_ADMIN'}},
   { path: 'clientes/form/:id',component:FormComponent, canActivate:[AuthGuard,RoleGuard], data:{role:'ROLE_ADMIN'}},
-  { path: 'login',component:LoginComponent}
+  { path: 'login',component:LoginComponent},
+  { path: 'facturas/:id',component:DetalleFacturaComponent}
 ]
 
 @NgModule({
@@ -46,7 +48,8 @@ const routes :Routes = [
     FormComponent,
     PaginatorComponent,
     DetalleComponent,
-    LoginComponent
+    LoginComponent,
+    DetalleFacturaComponent
   ],
   imports: [
     BrowserModule,
