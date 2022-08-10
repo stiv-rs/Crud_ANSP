@@ -2,6 +2,7 @@ import { Factura } from './../models/factura';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Producto } from '../models/producto';
 
 
 @Injectable({
@@ -19,5 +20,9 @@ export class FacturaService {
 
   delete(id:number):Observable<void>{
     return this.http.delete<void>(`${this.urlEndPoint}/${id}`);
+  }
+
+  filtrarProductos(term:string):Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.urlEndPoint}/filtrar-productos/${term}`);
   }
 }
