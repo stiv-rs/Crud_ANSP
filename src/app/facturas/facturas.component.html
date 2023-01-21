@@ -42,7 +42,11 @@
         </div>
       </div>
 
-      <table class="table-striped table-hover table-sm">
+      <div class="alert alert-info my-4" *ngIf="factura.items.length == 0">
+        No hay líneas asignadas para la factura. Debe agregar al menos una!
+      </div>
+
+      <table class="table-striped table-hover table-sm" *ngIf="factura.items.length > 0">
         <thead>
           <tr>
             <th>Producto</th>
@@ -63,6 +67,8 @@
            </tr>
         </tbody>
       </table>
+
+      <h3 class="float-right" *ngIf="factura.items.length > 0">Gran Total: <span class="badge badge-secondary bg-dark">{{factura.calcularGranTotal()}}</span></h3>
 
       <div class="form-group row">
         <div class="col-sm-6">
