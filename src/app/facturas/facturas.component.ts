@@ -1,6 +1,7 @@
+import  swal  from 'sweetalert2';
 import { ItemFactura } from './models/item-factura';
 import { FacturaService } from './services/factura.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Factura } from './models/factura';
 import { ClienteService } from "../clientes/cliente.service";
@@ -26,6 +27,7 @@ export class FacturasComponent implements OnInit {
 
   constructor(private clienteService:ClienteService,
               private activatedRoute:ActivatedRoute,
+              private router: Router,
               private facturaService: FacturaService) { }
 
   ngOnInit(): void {
@@ -104,6 +106,14 @@ export class FacturasComponent implements OnInit {
 
   eliminarItemFactura(id:number):void{
     this.factura.items = this.factura.items.filter((item: ItemFactura) => id != item.producto.id);
+  }
+
+  create(): void{
+    console.log(this.factura);
+    this.facturaService.create(this.factura).subscribe(factutra => {
+      swal. fire(this.titulo, `Factura ${this.factura.descripcion} creada con éxito`, 'success');
+      this.router.navigate(['/clientes'])
+    });
   }
 
 }
