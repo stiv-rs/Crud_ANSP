@@ -116,9 +116,9 @@ export class FacturasComponent implements OnInit {
     }
 
     if(facturaForm.form.valid && this.factura.items.length > 0){
-      this.facturaService.create(this.factura).subscribe(factutra => {
+      this.facturaService.create(this.factura).subscribe(factura => {
         swal. fire(this.titulo, `Factura ${this.factura.descripcion} creada con éxito`, 'success');
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['/facturas', this.factura.id]);
       });
     }
   }
